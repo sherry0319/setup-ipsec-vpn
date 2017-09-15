@@ -213,6 +213,7 @@ cat > /etc/ipsec.conf <<EOF
 version 2.0
 
 config setup
+  nat_traversal=yes
   virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:!$L2TP_NET,%v4:!$XAUTH_NET
   protostack=netkey
   nhelpers=0
@@ -297,9 +298,13 @@ ms-dns $DNS_SRV1
 ms-dns $DNS_SRV2
 noccp
 auth
+nodefaultroute
+debug
+idle 1800
 mtu 1280
 mru 1280
 proxyarp
+require-mschap-v2
 lcp-echo-failure 4
 lcp-echo-interval 30
 connect-delay 5000
